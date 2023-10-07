@@ -2,13 +2,21 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import { useEffect, useState } from 'react'
+import JSConfetti from 'js-confetti'
 
 export default function Home() {
 
 const [email, setEmail] = useState('')
 const [isEmailValid, setIsEmailValid] = useState(false);
 const [statusMessage, setStatusMessage] = useState('');
+const [isLoading, setIsLoading] = useState(false);
+const jsConfetti = new JSConfetti()
 
+const handleConfettiClick = () => {
+  jsConfetti.addConfetti({
+   emojis: ['👨🏽','👴🏿','👨'],
+})
+}
 
 const handleEmailChange = (e:any) => {
   setEmail(e.target.value);
@@ -19,9 +27,11 @@ console.log(e.target.value)
 
 const handleWaitlistClick = async () => {
     console.log('submitting email', email)
+    setIsLoading(true);
     try {
-      const signup = await fetch('https://api.getwaitlist.com/api/v1/signup', {
+      const signup = await fetch('https://api.getwaitlist.com/api/v1/waiter', {
         method: 'POST',
+        redirect: 'follow',
         headers: {
         'Content-Type': 'application/json',
       },
@@ -34,16 +44,17 @@ const handleWaitlistClick = async () => {
     console.log(response)
    if (signup.ok) {
         setStatusMessage('You have been added to the waitlist.');
+        handleConfettiClick();
+        setEmail('');
       } else {
         setStatusMessage('There was an error adding you to the waitlist.');
       }
-  
-
     }
     catch (error) {
       console.log(error)  
       setStatusMessage('There was an error adding you to the waitlist.');
     }
+setIsLoading(false);
 }
 
   return (
@@ -87,8 +98,14 @@ const handleWaitlistClick = async () => {
       <button
         className={styles.waitlistButton}
         onClick={handleWaitlistClick}
-        disabled={!isEmailValid}
-      >Join Waitlist
+        disabled={!isEmailValid || isLoading}
+      >
+      {isLoading ? (
+          <div className={styles.loader}></div>  // Show loader if loading
+        ) : (
+          'Join Waitlist'  // Show text if not loading
+        )}
+
       </button>
      
     {statusMessage && (
