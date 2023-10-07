@@ -19,30 +19,32 @@ const handleConfettiClick = () => {
       })
 }
 
-const handleEmailChange = (e:any) => {
-  setEmail(e.target.value);
-console.log(e.target.value)
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  setIsEmailValid(emailRegex.test(e.target.value));
-};
+          const handleEmailChange = (e:any) => {
+              setEmail(e.target.value);
+              console.log(e.target.value)
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              setIsEmailValid(emailRegex.test(e.target.value));
+          };
 
-const handleWaitlistClick = async () => {
-    console.log('submitting email', email)
-    setIsLoading(true);
-    try {
-      const signup = await fetch('https://api.getwaitlist.com/api/v1/waiter', {
-        method: 'POST',
-        redirect: 'follow',
-        headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({  
-        "email": email,
-        "waitlist_id": 11075
-      }),
-    })
+          const handleWaitlistClick = async () => {
+              console.log('submitting email', email)
+              setIsLoading(true);
+              try {
+                const signup = await fetch('https://api.getwaitlist.com/api/v1/waiter', {
+                  method: 'POST',
+                  redirect: 'follow',
+                  headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({  
+                  "email": email,
+                  "waitlist_id": 11075
+                }),
+              });
+
     const response = await signup.json();
     console.log(response)
+
    if (signup.ok) {
         setStatusMessage('You have been added to the waitlist.');
         handleConfettiClick();
