@@ -22,6 +22,7 @@
 .description {
   display: inherit;
   justify-content: inherit;
+  opacity: 0.9;
   align-items: inherit;
   font-size: 0.85rem;
   max-width: var(--max-width);
@@ -248,7 +249,8 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  /* margin: 4px 2px; */
+  margin: 20px;
   cursor: pointer;
   border-radius: 4px;
   transition: box-shadow 0.3s ease-in-out;
@@ -302,4 +304,9 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.x:hover,
+.salim:hover {
+  color: white;
 }
