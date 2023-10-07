@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Dad Gippity',
-  description: 'When Dad is not around to answer your questions',
+  description: 'When Dad is not around to answer your questions'
 }
 
 export default function RootLayout({
@@ -17,6 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+<head>
+<meta
+    property="og:image"
+    content="https://dadgippity.com/api/og"
+  />
+</head>
       <body className={inter.className}>{children}</body>
         <Analytics />
     </html>
