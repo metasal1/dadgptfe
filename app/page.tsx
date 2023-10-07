@@ -1,7 +1,51 @@
+'use client'
 import Image from 'next/image'
 import styles from './page.module.css'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+
+const [email, setEmail] = useState('')
+const [isEmailValid, setIsEmailValid] = useState(false);
+const [statusMessage, setStatusMessage] = useState('');
+
+
+const handleEmailChange = (e:any) => {
+  setEmail(e.target.value);
+console.log(e.target.value)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  setIsEmailValid(emailRegex.test(e.target.value));
+};
+
+const handleWaitlistClick = async () => {
+    console.log('submitting email', email)
+    try {
+      const signup = await fetch('https://api.getwaitlist.com/api/v1/signup', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({  
+        "email": email,
+        "waitlist_id": 11075
+      }),
+    })
+    const response = await signup.json();
+    console.log(response)
+   if (signup.ok) {
+        setStatusMessage('You have been added to the waitlist.');
+      } else {
+        setStatusMessage('There was an error adding you to the waitlist.');
+      }
+  
+
+    }
+    catch (error) {
+      console.log(error)  
+      setStatusMessage('There was an error adding you to the waitlist.');
+    }
+}
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -30,7 +74,28 @@ export default function Home() {
           priority
         />
       </div>
-<span>Currently in Beta!</span>
+      <span>Currently in Beta!</span>
+      <input
+        type="email"
+        value={email}
+        onChange={handleEmailChange}
+        className={styles.email}
+        placeholder="Enter your email"
+        required
+      />
+
+      <button
+        className={styles.waitlistButton}
+        onClick={handleWaitlistClick}
+        disabled={!isEmailValid}
+      >Join Waitlist
+      </button>
+     
+    {statusMessage && (
+        <div className={styles.statusMessage}>
+          {statusMessage}
+        </div>
+      )}
       <div className={styles.grid}>
         <a
           href="https://testflight.apple.com/join/YyjbC9QA"

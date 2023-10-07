@@ -237,3 +237,48 @@
     transform: rotate(0deg);
   }
 }
+
+
+.waitlistButton {
+  background-color: white;
+  border: none;
+  color: salmon;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.waitlistButton:hover {
+  box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+}
+
+.waitlistButton:focus {
+  outline: none;
+  box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+}
+
+.email {
+  background-color: white;
+  border: none;
+  color: salmon;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.email:focus {
+  outline: 2px solid salmon;
+  background-color: #e0f7fa;
+  box-shadow: 0 0 50px white;
+}
