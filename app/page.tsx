@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import { useEffect, useState } from 'react'
 import JSConfetti from 'js-confetti'
+import Footer from '@/components/Footer'
 
 export default function Home() {
 
@@ -146,30 +147,7 @@ setIsLoading(false);
         />
         </a>
       </div>
-      <footer className={styles.footer}>
-        <div className={styles.x}>
-        <a href='https://x.com/DadGippity' target='_blank'>
-        Find us on{" "} 
-        <Image
-          // className={styles.logo}
-          src="/x-logo.svg"
-          alt="Find us on X / Twitter"
-          width={15}
-          height={15}
-          priority
-        />
-        </a></div>
-          <div className={styles.salim}>
-          <a
-            href="https://metasal.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            Salim Karim
-          </a>
-        </div>
-        </footer>
+     <Footer />
     </main>
   )
 }
